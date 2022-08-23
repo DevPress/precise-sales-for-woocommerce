@@ -1,0 +1,29 @@
+{
+    "name": "devpress/precise-sales-for-woocommerce",
+    "description": "",
+    "keywords": [ "wordpress" ],
+    "type": "wordpress-plugin",
+    "homepage": "https://github.com/devpress/precise-sales-for-woocommerce",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Devin Price",
+            "homepage": "https://devpress.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/devpress/precise-sales-for-woocommerce/issues",
+        "source": "https://github.com/devpress/precise-sales-for-woocommerce"
+    },
+    "require-dev": {
+        "assertwell/wp-core-test-framework": "^0.1.1",
+        "php": ">=7.4",
+        "phpunit/phpunit": "^8",
+        "yoast/phpunit-polyfills": "^1.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SupportOrders\\Test\\": "tests/phpunit/"
+        }
+    }
+}
