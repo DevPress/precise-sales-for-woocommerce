@@ -17,10 +17,10 @@ class Precise_Sales_Test extends WP_UnitTestCase {
 
 		$product->save();
 
-		$sale = new PreciseSales();
+		$sale = new \PreciseSales();
 
-		$this->assertEquals( '12:12', $sale->get_product_time( $product ) );
-		$this->assertEquals( '11:11', $sale->get_product_time( $product, 'to' ) );
+		$this->assertEquals( '12:12', $sale->get_product_sale_time( $product ) );
+		$this->assertEquals( '11:11', $sale->get_product_sale_time( $product, 'to' ) );
 	}
 
 	public function test_sale() {

@@ -9,7 +9,7 @@
  * Developer: Devin Price
  * Developer URI: https://devpress.com
  *
- * WC requires at least: 6.8.0
+ * WC requires at least: 5.9.1
  * WC tested up to: 6.8.0
  *
  * License: GNU General Public License v3.0
@@ -80,7 +80,7 @@ class PreciseSales {
 	}
 
 	/**
-	 * Saves the product sale time.
+	 * Saves the product sale time with hours and minutes and minutes.
 	 *
 	 * @param \WC_Product $product
 	 */
@@ -135,13 +135,13 @@ class PreciseSales {
 	}
 
 	/**
-	 * Script for simple products/subscriptions.
+	 * Script for simple products and subscriptions.
 	 */
 	public function script() {
 		?>
 		<script>
 			(function($){
-				$.fn.uyInputFilter = function(inputFilter) {
+				$.fn.psInputFilter = function(inputFilter) {
 					return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
 						var values = this.value.split(':'),
 							value1 = values[0],
@@ -205,10 +205,10 @@ class PreciseSales {
 				};
 
 				function psHookTimeInputs() {
-					$("._sale_price_time_from:not(.uy-filtered), ._sale_price_time_to:not(.uy-filtered)").each(function(){
-						$(this).uyInputFilter(function(value) {
+					$("._sale_price_time_from:not(.ps-filtered), ._sale_price_time_to:not(.ps-filtered)").each(function(){
+						$(this).psInputFilter(function(value) {
 							return /^\d*$/.test(value);    // Allow digits only, using a RegExp
-						}).addClass('uy-filtered');
+						}).addClass('ps-filtered');
 					})
 				}
 
@@ -258,13 +258,13 @@ class PreciseSales {
 	}
 
 	/**
-	 * Get Product Time.
+	 * Get the product sale time with default format returning "H:i".
 	 *
 	 * @param \WC_Product $product
 	 * @param string      $type
 	 * @param string      $format
 	 */
-	public function get_product_time( $product, $type = 'from', $format = 'H:i' ) {
+	public function get_product_sale_time( $product, $type = 'from', $format = 'H:i' ) {
 		if ( 'from' === $type ) {
 			$timestamp = $product->get_date_on_sale_from( 'edit' ) ? $product->get_date_on_sale_from( 'edit' )->getOffsetTimestamp() : false;
 		} else {
@@ -284,8 +284,8 @@ class PreciseSales {
 	public function add_product_sale_time() {
 		global $product_object;
 
-		$sale_price_time_from = $this->get_product_time( $product_object );
-		$sale_price_time_to   = $this->get_product_time( $product_object, 'to' );
+		$sale_price_time_from = $this->get_product_sale_time( $product_object );
+		$sale_price_time_to   = $this->get_product_sale_time( $product_object, 'to' );
 		?>
 		<div class="hide-if-js">
 			<p class="form-field sale_price_dates_fields">
