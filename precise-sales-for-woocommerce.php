@@ -9,7 +9,7 @@
  * Developer: Devin Price
  * Developer URI: https://devpress.com
  *
- * WC requires at least: 6.8.0
+ * WC requires at least: 5.9.1
  * WC tested up to: 6.8.0
  *
  * License: GNU General Public License v3.0
@@ -80,7 +80,7 @@ class PreciseSales {
 	}
 
 	/**
-	 * Saves the product sale time.
+	 * Saves the product sale time with hours and minutes and minutes.
 	 *
 	 * @param \WC_Product $product
 	 */
@@ -112,7 +112,7 @@ class PreciseSales {
 			$to_time     = isset( $_POST['_sale_price_time_to'] ) && $_POST['_sale_price_time_to'] ? wc_clean( wp_unslash( $_POST['_sale_price_time_to'] ) ) : '00:00:00';
 			$to_time_arr = explode( ':', $to_time );
 			if ( count( $to_time_arr ) < 3 ) {
-				// We miss seconds.
+				// We don't save to the second.
 				$to_time .= ':59';
 			}
 
@@ -135,13 +135,57 @@ class PreciseSales {
 	}
 
 	/**
-	 * Script for simple products/subscriptions.
+	 * Get the product sale time with default format returning "H:i".
+	 *
+	 * @param \WC_Product $product
+	 * @param string      $type
+	 * @param string      $format
+	 */
+	public function get_product_sale_time( $product, $type = 'from', $format = 'H:i' ) {
+		if ( 'from' === $type ) {
+			$timestamp = $product->get_date_on_sale_from( 'edit' ) ? $product->get_date_on_sale_from( 'edit' )->getOffsetTimestamp() : false;
+		} else {
+			$timestamp = $product->get_date_on_sale_to( 'edit' ) ? $product->get_date_on_sale_to( 'edit' )->getOffsetTimestamp() : false;
+		}
+
+		if ( ! $timestamp ) {
+			return '';
+		}
+
+		return date_i18n( $format, $timestamp );
+	}
+
+	/**
+	 * Display new sale time fields on the prodict page.
+	 */
+	public function add_product_sale_time() {
+		global $product_object;
+
+		$sale_price_time_from = $this->get_product_sale_time( $product_object );
+		$sale_price_time_to   = $this->get_product_sale_time( $product_object, 'to' );
+		?>
+		<div class="hide-if-js">
+			<p class="form-field sale_price_dates_fields">
+				<label for="_sale_price_time_from"><?php esc_html_e( 'Sale Time From', 'universalyums' ); ?></label>
+				<input pattern="[0-9]{2}:[0-9]{2}"  type="text" class="short _sale_price_time_from" name="_sale_price_time_from" id="_sale_price_time_from" value="<?php echo esc_attr( $sale_price_time_from ); ?>" placeholder="HH:mm" />
+			</p>
+			<p class="form-field sale_price_dates_fields">
+				<label for="_sale_price_time_to"><?php esc_html_e( 'Sale Time To', 'universalyums' ); ?></label>
+				<input pattern="[0-9]{2}:[0-9]{2}"  type="text" class="short _sale_price_time_to" name="_sale_price_time_to" id="_sale_price_time_to" value="<?php echo esc_attr( $sale_price_time_to ); ?>" placeholder="HH:mm" />
+			</p>
+		</div>
+		<?php
+		add_action( 'admin_footer', [ $this, 'script' ] );
+	}
+
+	/**
+	 * Script for simple products and subscriptions.
 	 */
 	public function script() {
 		?>
 		<script>
 			(function($){
-				$.fn.uyInputFilter = function(inputFilter) {
+				$.fn.psInputFilter = function(inputFilter) {
 					return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
 						var values = this.value.split(':'),
 							value1 = values[0],
@@ -205,10 +249,10 @@ class PreciseSales {
 				};
 
 				function psHookTimeInputs() {
-					$("._sale_price_time_from:not(.uy-filtered), ._sale_price_time_to:not(.uy-filtered)").each(function(){
-						$(this).uyInputFilter(function(value) {
+					$("._sale_price_time_from:not(.ps-filtered), ._sale_price_time_to:not(.ps-filtered)").each(function(){
+						$(this).psInputFilter(function(value) {
 							return /^\d*$/.test(value);    // Allow digits only, using a RegExp
-						}).addClass('uy-filtered');
+						}).addClass('ps-filtered');
 					})
 				}
 
@@ -248,57 +292,12 @@ class PreciseSales {
 				.sale_price_dates_fields:not(.variation-time-fields) ._sale_price_dates_to {
 					clear: left;
 				}
-
 				.sale_price_dates_fields:not(.variation-time-fields) ._sale_price_time_to {
 					float: left;
 				}
 			}
 		</style>
 		<?php
-	}
-
-	/**
-	 * Get Product Time.
-	 *
-	 * @param \WC_Product $product
-	 * @param string      $type
-	 * @param string      $format
-	 */
-	public function get_product_time( $product, $type = 'from', $format = 'H:i' ) {
-		if ( 'from' === $type ) {
-			$timestamp = $product->get_date_on_sale_from( 'edit' ) ? $product->get_date_on_sale_from( 'edit' )->getOffsetTimestamp() : false;
-		} else {
-			$timestamp = $product->get_date_on_sale_to( 'edit' ) ? $product->get_date_on_sale_to( 'edit' )->getOffsetTimestamp() : false;
-		}
-
-		if ( ! $timestamp ) {
-			return '';
-		}
-
-		return date_i18n( $format, $timestamp );
-	}
-
-	/**
-	 * Add Sale Time.
-	 */
-	public function add_product_sale_time() {
-		global $product_object;
-
-		$sale_price_time_from = $this->get_product_time( $product_object );
-		$sale_price_time_to   = $this->get_product_time( $product_object, 'to' );
-		?>
-		<div class="hide-if-js">
-			<p class="form-field sale_price_dates_fields">
-				<label for="_sale_price_time_from"><?php esc_html_e( 'Sale Time From', 'universalyums' ); ?></label>
-				<input pattern="[0-9]{2}:[0-9]{2}"  type="text" class="short _sale_price_time_from" name="_sale_price_time_from" id="_sale_price_time_from" value="<?php echo esc_attr( $sale_price_time_from ); ?>" placeholder="HH:mm" />
-			</p>
-			<p class="form-field sale_price_dates_fields">
-				<label for="_sale_price_time_to"><?php esc_html_e( 'Sale Time To', 'universalyums' ); ?></label>
-				<input pattern="[0-9]{2}:[0-9]{2}"  type="text" class="short _sale_price_time_to" name="_sale_price_time_to" id="_sale_price_time_to" value="<?php echo esc_attr( $sale_price_time_to ); ?>" placeholder="HH:mm" />
-			</p>
-		</div>
-		<?php
-		add_action( 'admin_footer', [ $this, 'script' ] );
 	}
 
 }

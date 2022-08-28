@@ -16,14 +16,16 @@
         "source": "https://github.com/devpress/precise-sales-for-woocommerce"
     },
     "require-dev": {
+        "automattic/vipwpcs": "^2.3",
         "assertwell/wp-core-test-framework": "^0.1.1",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
         "php": ">=7.4",
-        "phpunit/phpunit": "^8",
+        "phpunit/phpunit": "^7",
         "yoast/phpunit-polyfills": "^1.0"
     },
     "autoload-dev": {
         "psr-4": {
-            "SupportOrders\\Test\\": "tests/phpunit/"
+            "PreciseSales\\Test\\": "tests/phpunit/"
         }
     }
 }
