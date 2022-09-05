@@ -95,7 +95,7 @@ class PreciseSales {
 			$from_time     = isset( $_POST['_sale_price_time_from'] ) && $_POST['_sale_price_time_from'] ? wc_clean( wp_unslash( $_POST['_sale_price_time_from'] ) ) : '00:00:00';
 			$from_time_arr = explode( ':', $from_time );
 			if ( count( $from_time_arr ) < 3 ) {
-				// We miss seconds.
+				// We don't save to the second.
 				$from_time .= ':00';
 			}
 
@@ -187,61 +187,60 @@ class PreciseSales {
 			(function($){
 				$.fn.psInputFilter = function(inputFilter) {
 					return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
-						var values = this.value.split(':'),
-							value1 = values[0],
-							value2 = values[1] || '';
+						const values = this.value.split(':');
+						let [hour, minute = ''] = values;
 
-						if ( value1.length > 2 ) {
-							value2 = value1.substr(2);
-							value1 = value1.substr(0, 2);
+						if ( hour.length > 2 ) {
+							minute = hour.substr(2);
+							hour = hour.substr(0, 2);
 						}
 
-						if ( value2.length > 2 ) {
-							value2 = value2.substr(0, 2);
+						if ( minute.length > 2 ) {
+							minute = minute.substr(0, 2);
 						}
 
-						if (inputFilter(value1)) {
-							this.oldValue = value1;
+						if (inputFilter(hour)) {
+							this.oldValue = hour;
 							this.oldSelectionStart = this.selectionStart;
 							this.oldSelectionEnd = this.selectionEnd;
-							if ( value1 < 0 ) {
-								value1 = 0;
+							if ( hour < 0 ) {
+								hour = 0;
 							}
 
-							if ( value1 > 23 ) {
-								value1 = 23;
+							if ( hour > 23 ) {
+								hour = 23;
 							}
 						} else if (this.hasOwnProperty("oldValue")) {
-							value1 = this.oldValue;
+							hour = this.oldValue;
 							this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
 						} else {
-							value1 = "";
+							hour = "";
 						}
 
-						if (value2) {
-							if (inputFilter(value2)) {
-								this.oldValue2 = value2;
+						if (minute) {
+							if (inputFilter(minute)) {
+								this.oldminute = minute;
 								this.oldSelectionStart = this.selectionStart;
 								this.oldSelectionEnd = this.selectionEnd;
-								if ( value2 < 0 ) {
-									value2 = 0;
+								if ( minute < 0 ) {
+									minute = 0;
 								}
-								if ( value2 > 59 ) {
-									value2 = 59;
+								if ( minute > 59 ) {
+									minute = 59;
 								}
-							} else if (this.hasOwnProperty("oldValue2")) {
-								value2 = this.oldValue2;
+							} else if (this.hasOwnProperty("oldminute")) {
+								minute = this.oldminute;
 								this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
 							} else {
-								value2 = "";
+								minute = "";
 							}
 						}
 
-						var value = value1;
+						let value = hour;
 
-						if ( value2 ) {
+						if ( minute ) {
 							value += ':';
-							value += value2;
+							value += minute;
 						}
 
 						this.value = value;
@@ -259,7 +258,7 @@ class PreciseSales {
 				$(function(){
 					psHookTimeInputs();
 
-					var timeFromInput = $('#_sale_price_time_from');
+					const timeFromInput = $('#_sale_price_time_from');
 
 					if ( timeFromInput.length ) {
 						timeFromInput.insertAfter('#_sale_price_dates_from');
@@ -267,7 +266,7 @@ class PreciseSales {
 						timeFromInput.datepicker("destroy");
 					}
 
-					var timeToInput = $('#_sale_price_time_to');
+					const timeToInput = $('#_sale_price_time_to');
 
 					if ( timeToInput.length ) {
 						timeToInput.insertAfter('#_sale_price_dates_to');
