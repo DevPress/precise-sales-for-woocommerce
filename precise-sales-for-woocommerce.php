@@ -1,13 +1,11 @@
 <?php
 /**
  * Plugin Name: Precise Sales for WooCommerce
- * Plugin URI: https://devpress.com
+ * Plugin URI: https://devpress.com/products/precise-sales-for-woocommerce/
  * Description: Allows WooCommerce sales to be scheduled to the minute.
  * Version: 1.0.0
  * Author: DevPress
  * Author URI: https://devpress.com
- * Developer: Devin Price
- * Developer URI: https://devpress.com
  *
  * WC requires at least: 5.9.1
  * WC tested up to: 6.8.0
