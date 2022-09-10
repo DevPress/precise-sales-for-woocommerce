@@ -26,4 +26,4 @@ This plugin uses the same product meta fields to store the more percise sale tim
 
 ### Credits
 
-The majority of this code was contributed by [Igor Benic](https://twitter.com/igorbenic) and developed for [Universal Yums](https://www.universalyums.com/). It coverted to a standalone plugin and polished for release by [Devin Price](https://twitter.com/devinsays/).
+The majority of this code was contributed by [Igor Benic](https://twitter.com/igorbenic) and developed for [Universal Yums](https://www.universalyums.com/). It was coverted to a standalone plugin and polished for release by [Devin Price](https://twitter.com/devinsays/).
