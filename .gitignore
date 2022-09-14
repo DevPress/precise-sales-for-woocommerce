@@ -3,6 +3,5 @@
 Icon
 
 # Composer
-dist
 vendor
 .phpcs-cache

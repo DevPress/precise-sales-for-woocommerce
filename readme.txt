@@ -13,9 +13,11 @@ Enables WooCommerce product sale scheduling to the day, hour and minute.
 
 == Description ==
 
-By default WooCommerce functionality only offers scheduling to the day, which means scheduled sales are locked into rigid 24 hour increments. This plugin adds a field for hour and minute, so that sales can be scheduled to start and end at a more precise time.
+Enables WooCommerce product sale scheduling to the day, hour and minute.
 
-This extension is especially helpful for shops that operate in a country with multiple timezones (like the United States) that want to offer a one day sale. For those shops, a sale can start at midnight in one timezone and end at midnight in another timezone- allowing a 27 hour sale (or other arbitrary period) rather than being locked into increments of 24 hours.
+This extends the default WooCommerce functionality which only offers product sale scheduling to the day (in 24 hour increments). This plugin adds a field for hour and minute, so that sales can be scheduled to start and end at a more precise time.
+
+This extension is especially helpful for shops that operate in a country with multiple timezones (like the United States) that want to offer a one day sale across timezones. For those shops, a sale can start at midnight in one timezone and end at midnight in another timezone- allowing a 27 hour sale (or other arbitrary period).
 
 = Credits =
 
