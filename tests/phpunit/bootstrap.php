@@ -67,6 +67,6 @@ require_once $bootstrap;
 
 echo esc_html( sprintf(
 	/* Translators: %1$s is the WooCommerce release being loaded. */
-	__( 'Using WooCommerce %1$s.', 'precise-orders' ),
+	__( 'Using WooCommerce %1$s.', 'precise-sales-for-woocommerce' ),
 	WC_VERSION
 ) ) . PHP_EOL;

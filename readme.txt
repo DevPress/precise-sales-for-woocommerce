@@ -2,12 +2,14 @@
 
 Contributors: devpress, downstairsdev
 Tags: woocommerce, sales
-Requires at least: 6.0
-Tested up to: 6.0
-Stable tag: 1.0.0
-Requires PHP: 7.0
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Requires at least: 6.4
+Tested up to: 6.9
+Stable tag: 1.1.0
+Requires PHP: 7.4
+WC requires at least: 8.0.0
+WC tested up to: 10.4.3
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Enables WooCommerce product sale scheduling to the day, hour and minute.
 
@@ -40,6 +42,17 @@ This plugin uses the same product meta fields to store the more precise sale tim
 1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Screenshots are stored in the /assets directory.
 
 == Changelog ==
+
+= 1.1.0 =
+
+* Updated compatibility for WooCommerce 10.4.3 and WordPress 6.9.
+* Updated minimum PHP requirement to 7.4.
+* Updated minimum WooCommerce requirement to 8.0.0.
+* Fixed text domain for translation strings.
+* Improved JavaScript compatibility.
+* Added additional unit tests for edge cases.
+* Expanded CI test matrix to include PHP 8.x versions.
+* Standardized license to GPL-3.0.
 
 = 1.0 =
 

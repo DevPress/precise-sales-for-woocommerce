@@ -3,12 +3,15 @@
  * Plugin Name: Precise Sales for WooCommerce
  * Plugin URI: https://devpress.com/products/precise-sales-for-woocommerce/
  * Description: Allows WooCommerce sales to be scheduled to the minute.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: DevPress
  * Author URI: https://devpress.com
  *
- * WC requires at least: 5.9.1
- * WC tested up to: 6.8.0
+ * Requires PHP: 7.4
+ * Requires at least: 6.4
+ *
+ * WC requires at least: 8.0.0
+ * WC tested up to: 10.4.3
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -164,11 +167,11 @@ class PreciseSales {
 		?>
 		<div class="hide-if-js">
 			<p class="form-field sale_price_dates_fields">
-				<label for="_sale_price_time_from"><?php esc_html_e( 'Sale Time From', 'universalyums' ); ?></label>
+				<label for="_sale_price_time_from"><?php esc_html_e( 'Sale Time From', 'precise-sales-for-woocommerce' ); ?></label>
 				<input pattern="[0-9]{2}:[0-9]{2}"  type="text" class="short _sale_price_time_from" name="_sale_price_time_from" id="_sale_price_time_from" value="<?php echo esc_attr( $sale_price_time_from ); ?>" placeholder="HH:mm" />
 			</p>
 			<p class="form-field sale_price_dates_fields">
-				<label for="_sale_price_time_to"><?php esc_html_e( 'Sale Time To', 'universalyums' ); ?></label>
+				<label for="_sale_price_time_to"><?php esc_html_e( 'Sale Time To', 'precise-sales-for-woocommerce' ); ?></label>
 				<input pattern="[0-9]{2}:[0-9]{2}"  type="text" class="short _sale_price_time_to" name="_sale_price_time_to" id="_sale_price_time_to" value="<?php echo esc_attr( $sale_price_time_to ); ?>" placeholder="HH:mm" />
 			</p>
 		</div>
@@ -261,7 +264,9 @@ class PreciseSales {
 					if ( timeFromInput.length ) {
 						timeFromInput.insertAfter('#_sale_price_dates_from');
 						timeFromInput.css('margin-bottom','1em');
-						timeFromInput.datepicker("destroy");
+						if ( $.fn.datepicker && timeFromInput.data('datepicker') ) {
+							timeFromInput.datepicker("destroy");
+						}
 					}
 
 					const timeToInput = $('#_sale_price_time_to');
@@ -270,7 +275,9 @@ class PreciseSales {
 						timeToInput.insertAfter('#_sale_price_dates_to');
 						timeToInput.css('margin-bottom','1em');
 						$('#_sale_price_dates_to').css('margin-bottom', '1em');
-						timeToInput.datepicker("destroy");
+						if ( $.fn.datepicker && timeToInput.data('datepicker') ) {
+							timeToInput.datepicker("destroy");
+						}
 					}
 				});
 			})(jQuery);
