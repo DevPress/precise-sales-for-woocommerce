@@ -61,6 +61,16 @@ function _manually_load_plugin() {
 }
 tests_add_filter('muplugins_loaded', '_manually_load_plugin');
 
+// Install WooCommerce tables after setup.
+function _install_woocommerce_tables() {
+    WC_Install::install();
+
+    // Reload capabilities after install.
+    $GLOBALS['wp_roles'] = null;
+    wp_roles();
+}
+tests_add_filter('setup_theme', '_install_woocommerce_tables');
+
 // Bootstrap Tests.
 require_once TESTS_DIR . '/includes/bootstrap.php';
 
