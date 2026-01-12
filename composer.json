@@ -1,6 +1,6 @@
 {
     "name": "devpress/precise-sales-for-woocommerce",
-    "description": "",
+    "description": "Allows WooCommerce sales to be scheduled to the minute.",
     "keywords": [ "wordpress" ],
     "type": "wordpress-plugin",
     "homepage": "https://github.com/devpress/precise-sales-for-woocommerce",

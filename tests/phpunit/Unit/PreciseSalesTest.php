@@ -1,12 +1,23 @@
 <?php
+/**
+ * Tests for the PreciseSales class.
+ *
+ * @package PreciseSales\Tests
+ */
 
 namespace PreciseSales\Test\Unit;
 
 use WP_UnitTestCase;
 use WC_Helper_Product;
 
+/**
+ * Test case for PreciseSales functionality.
+ */
 class Precise_Sales_Test extends WP_UnitTestCase {
 
+	/**
+	 * Test that sale times are correctly retrieved from a product.
+	 */
 	public function test_sales_time() {
 		$product = WC_Helper_Product::create_simple_product();
 		$product->set_props(
@@ -24,6 +35,9 @@ class Precise_Sales_Test extends WP_UnitTestCase {
 		$this->assertEquals( '11:11', $sale->get_product_sale_time( $product, 'to' ) );
 	}
 
+	/**
+	 * Test that a product is marked as on sale when within scheduled time.
+	 */
 	public function test_sale() {
 		$product = WC_Helper_Product::create_simple_product();
 		$time    = current_time( 'timestamp' );
@@ -45,6 +59,9 @@ class Precise_Sales_Test extends WP_UnitTestCase {
 		$this->assertTrue( $product->is_on_sale() );
 	}
 
+	/**
+	 * Test that sale price is applied during scheduled sale period.
+	 */
 	public function test_sale_price() {
 		$product = WC_Helper_Product::create_simple_product();
 		$time    = current_time( 'timestamp' );
@@ -64,6 +81,9 @@ class Precise_Sales_Test extends WP_UnitTestCase {
 		$this->assertEquals( 20, $price );
 	}
 
+	/**
+	 * Test that regular price is used when sale is scheduled in the future.
+	 */
 	public function test_no_sale_price() {
 		$product = WC_Helper_Product::create_simple_product();
 		$time    = current_time( 'timestamp' ) + MONTH_IN_SECONDS;

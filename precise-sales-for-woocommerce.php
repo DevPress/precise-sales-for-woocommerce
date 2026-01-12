@@ -81,9 +81,9 @@ class PreciseSales {
 	}
 
 	/**
-	 * Saves the product sale time with hours and minutes and minutes.
+	 * Saves the product sale time with hours and minutes.
 	 *
-	 * @param \WC_Product $product
+	 * @param \WC_Product $product Product object.
 	 */
 	public function save_product_sale_time( $product ) {
 		$date_on_sale_from = '';
@@ -138,9 +138,10 @@ class PreciseSales {
 	/**
 	 * Get the product sale time with default format returning "H:i".
 	 *
-	 * @param \WC_Product $product
-	 * @param string      $type
-	 * @param string      $format
+	 * @param \WC_Product $product Product object.
+	 * @param string      $type    Type of date: 'from' or 'to'.
+	 * @param string      $format  Date format string.
+	 * @return string Formatted time string or empty string if not set.
 	 */
 	public function get_product_sale_time( $product, $type = 'from', $format = 'H:i' ) {
 		if ( 'from' === $type ) {
@@ -157,7 +158,7 @@ class PreciseSales {
 	}
 
 	/**
-	 * Display new sale time fields on the prodict page.
+	 * Display sale time fields on the product edit page.
 	 */
 	public function add_product_sale_time() {
 		global $product_object;

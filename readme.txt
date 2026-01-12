@@ -39,7 +39,7 @@ This plugin uses the same product meta fields to store the more precise sale tim
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Screenshots are stored in the /assets directory.
+1. Time fields added to the WooCommerce product sale schedule settings.
 
 == Changelog ==
 
