@@ -1,6 +1,6 @@
 # Precise Sales for WooCommerce ![Testing status](https://github.com/devpress/precise-sales-for-woocommerce/actions/workflows/php-tests.yml/badge.svg?branch=main)
 
--   Requires PHP: 7.4
+-   Requires PHP: 8.2
 -   WP requires at least: 6.4
 -   WP tested up to: 6.9
 -   WC requires at least: 8.0.0

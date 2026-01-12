@@ -5,7 +5,7 @@ Tags: woocommerce, sales
 Requires at least: 6.4
 Tested up to: 6.9
 Stable tag: 1.1.0
-Requires PHP: 7.4
+Requires PHP: 8.2
 WC requires at least: 8.0.0
 WC tested up to: 10.4.3
 License: GPLv3 or later
@@ -46,7 +46,7 @@ This plugin uses the same product meta fields to store the more precise sale tim
 = 1.1.0 =
 
 * Updated compatibility for WooCommerce 10.4.3 and WordPress 6.9.
-* Updated minimum PHP requirement to 7.4.
+* Updated minimum PHP requirement to 8.2.
 * Updated minimum WooCommerce requirement to 8.0.0.
 * Fixed text domain for translation strings.
 * Improved JavaScript compatibility.

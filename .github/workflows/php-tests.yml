@@ -8,33 +8,21 @@ jobs:
       fail-fast: false
       matrix:
         php_ver:
-          - "7.4"
-          - "8.0"
-          - "8.1"
           - "8.2"
           - "8.3"
         wp_ver:
           - "latest"
         wc_ver:
-          - "latest"
-          - "9.0.0"
-          - "8.0.0"
-        exclude:
-          # Only test oldest WC with oldest PHP
-          - php_ver: "8.0"
-            wc_ver: "8.0.0"
-          - php_ver: "8.1"
-            wc_ver: "8.0.0"
-          - php_ver: "8.2"
-            wc_ver: "8.0.0"
-          - php_ver: "8.3"
-            wc_ver: "8.0.0"
+          - "10.4.3"
 
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout the files
         uses: actions/checkout@v4
+
+      - name: Install SVN
+        run: sudo apt-get update && sudo apt-get install -y subversion
 
       - name: Setup PHP with tools
         uses: shivammathur/setup-php@v2

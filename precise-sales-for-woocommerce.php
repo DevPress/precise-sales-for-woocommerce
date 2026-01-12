@@ -7,7 +7,7 @@
  * Author: DevPress
  * Author URI: https://devpress.com
  *
- * Requires PHP: 7.4
+ * Requires PHP: 8.2
  * Requires at least: 6.4
  *
  * WC requires at least: 8.0.0
