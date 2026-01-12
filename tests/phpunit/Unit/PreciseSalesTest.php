@@ -7,7 +7,7 @@ use WP_UnitTestCase;
 class Precise_Sales_Test extends WP_UnitTestCase {
 
 	public function test_sales_time() {
-		$product = \WC_Helper_Product::create_simple_product();
+		$product = WC_Helper_Product::create_simple_product();
 		$product->set_props(
 			[
 				'date_on_sale_from' => '2022-12-01 12:12:00',
@@ -24,7 +24,7 @@ class Precise_Sales_Test extends WP_UnitTestCase {
 	}
 
 	public function test_sale() {
-		$product = \WC_Helper_Product::create_simple_product();
+		$product = WC_Helper_Product::create_simple_product();
 		$time    = current_time( 'timestamp' );
 		$product->set_props(
 			[
@@ -45,7 +45,7 @@ class Precise_Sales_Test extends WP_UnitTestCase {
 	}
 
 	public function test_sale_price() {
-		$product = \WC_Helper_Product::create_simple_product();
+		$product = WC_Helper_Product::create_simple_product();
 		$time    = current_time( 'timestamp' );
 		$product->set_props(
 			[
@@ -64,7 +64,7 @@ class Precise_Sales_Test extends WP_UnitTestCase {
 	}
 
 	public function test_no_sale_price() {
-		$product = \WC_Helper_Product::create_simple_product();
+		$product = WC_Helper_Product::create_simple_product();
 		$time    = current_time( 'timestamp' ) + MONTH_IN_SECONDS;
 		$product->set_props(
 			[
@@ -86,7 +86,7 @@ class Precise_Sales_Test extends WP_UnitTestCase {
 	 * Test midnight sale time (00:00).
 	 */
 	public function test_midnight_sale_time() {
-		$product = \WC_Helper_Product::create_simple_product();
+		$product = WC_Helper_Product::create_simple_product();
 		$product->set_props(
 			[
 				'date_on_sale_from' => '2024-01-15 00:00:00',
@@ -106,7 +106,7 @@ class Precise_Sales_Test extends WP_UnitTestCase {
 	 * Test end of day sale time (23:59).
 	 */
 	public function test_end_of_day_sale_time() {
-		$product = \WC_Helper_Product::create_simple_product();
+		$product = WC_Helper_Product::create_simple_product();
 		$product->set_props(
 			[
 				'date_on_sale_from' => '2024-01-15 23:59:00',
@@ -126,7 +126,7 @@ class Precise_Sales_Test extends WP_UnitTestCase {
 	 * Test empty time returns empty string.
 	 */
 	public function test_empty_time_returns_empty_string() {
-		$product = \WC_Helper_Product::create_simple_product();
+		$product = WC_Helper_Product::create_simple_product();
 		// Don't set any sale dates.
 		$product->save();
 
