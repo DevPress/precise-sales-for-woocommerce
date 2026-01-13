@@ -1,0 +1,25 @@
+# Git
+/.git
+/.gitignore
+
+# GitHub
+/.github
+
+# Development
+/.claude
+/tests
+/vendor
+/node_modules
+
+# Config files
+/composer.json
+/composer.lock
+/phpunit.xml
+/phpcs.xml
+/.phpcs-cache
+/.editorconfig
+/.nvmrc
+
+# OS files
+.DS_Store
+Thumbs.db
