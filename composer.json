@@ -1,10 +1,10 @@
 {
     "name": "devpress/precise-sales-for-woocommerce",
-    "description": "",
+    "description": "Allows WooCommerce sales to be scheduled to the minute.",
     "keywords": [ "wordpress" ],
     "type": "wordpress-plugin",
     "homepage": "https://github.com/devpress/precise-sales-for-woocommerce",
-    "license": "GPL-2.0+",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Devin Price",
@@ -16,16 +16,21 @@
         "source": "https://github.com/devpress/precise-sales-for-woocommerce"
     },
     "require-dev": {
-        "automattic/vipwpcs": "^2.3",
-        "assertwell/wp-core-test-framework": "^0.1.1",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
-        "php": ">=7.4",
-        "phpunit/phpunit": "^7",
-        "yoast/phpunit-polyfills": "^1.0"
+        "automattic/vipwpcs": "^3.0",
+        "assertwell/wp-core-test-framework": "^0.2",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "php": ">=8.2",
+        "phpunit/phpunit": "^9.6",
+        "yoast/phpunit-polyfills": "^2.0"
     },
     "autoload-dev": {
         "psr-4": {
             "PreciseSales\\Test\\": "tests/phpunit/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     }
 }

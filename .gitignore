@@ -5,3 +5,6 @@ Icon
 # Composer
 vendor
 .phpcs-cache
+
+# Tests
+tests/tmp
